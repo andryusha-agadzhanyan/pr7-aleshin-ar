@@ -1,0 +1,19 @@
+add;id;name;price;quantity | remove;id | total | category | confirm | show | new
+Также: id;name;price;quantity. Выход: exit или пустая строка.
+positions=1 total=20000.00 status=DRAFT category=средняя
+positions=1 total=50000.00 status=DRAFT category=средняя
+positions=1 total=50000.00 status=DRAFT category=средняя
+positions=2 total=500000.00 status=DRAFT category=крупная
+positions=2 total=500000.00 status=CONFIRMED category=крупная
+Ошибка: order is confirmed
+Ошибка: order is confirmed
+Ошибка: order is confirmed
+positions=0 total=0.00 status=DRAFT category=малая
+positions=1 total=500000.01 status=DRAFT category=крупнейшая
+Ошибка: order total exceeds 500000.0
+positions=0 total=0.00 status=DRAFT category=малая
+Ошибка: order is empty
+Ошибка: price must be > 0, got -1.0
+Ошибка: surrounding spaces are not allowed
+positions=1 total=9999.99 status=DRAFT category=малая
+positions=1 total=9999.99 status=DRAFT category=малая

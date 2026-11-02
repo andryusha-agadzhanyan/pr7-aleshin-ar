@@ -1,0 +1,53 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad=0.25, nodesep=0.35, ranksep=0.42, splines=polyline];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#444444", fontname="Times New Roman", fontsize=15, margin="0.14,0.10"];
+  edge [fontname="Times New Roman", fontsize=13, color="#555555", arrowsize=0.7];
+  start [label="Начало", shape=oval, group=main];
+  create [label="Создать заказ сотрудника\nOrderService.createOrder: статус DRAFT", group=main];
+  input [label="Получить товар и количество", shape=parallelogram, group=main];
+  validate [label="Проверить DRAFT, product, id, name,\nконечную цену > 0 и quantity от 1 до 100", group=main];
+  valid [label="Параметры корректны?", shape=diamond, group=main];
+  exists [label="Товар с таким id\nуже есть?", shape=diamond, group=main];
+  sumok [label="Количество после\nобъединения не больше 100?", shape=diamond, group=merge];
+  merge [label="Увеличить quantity через increase\nТовар и его цена остаются прежними", group=merge];
+  add [label="Добавить новую OrderItem", group=main];
+  error [label="Сообщить об ошибке\nСостав заказа не менять", group=error];
+  more [label="Есть ещё позиции?", shape=diamond, group=main];
+  total [label="Рассчитать total: сумма lineTotal\nОпределить категорию addTotalCategory", group=main];
+  canconfirm [label="DRAFT, заказ не пустой\nи total <= CONFIRM_LIMIT (500000)?", shape=diamond, group=main];
+  confirm [label="Подтвердить заказ\nstatus = CONFIRMED", group=main];
+  reject [label="IllegalStateException\nСтатус не менять", group=error];
+  end [label="Завершение сценария", shape=oval, group=main];
+  backTop [shape=point, width=0, height=0, label="", style=invis, group=loop];
+  backMid [shape=point, width=0, height=0, label="", style=invis, group=loop];
+  backBottom [shape=point, width=0, height=0, label="", style=invis, group=loop];
+  start -> create -> input -> validate -> valid;
+  valid -> exists [label="да"];
+  valid -> error [label="нет", constraint=false];
+  exists -> add [label="нет"];
+  exists -> sumok [label="да"];
+  sumok -> merge [label="да"];
+  sumok -> error [label="нет", constraint=false];
+  add -> more;
+  merge -> more;
+  error -> more [constraint=false];
+  more -> backBottom [label="да", constraint=false, arrowhead=none, tailport=w];
+  backBottom -> backMid -> backTop [constraint=false, arrowhead=none];
+  backTop -> input [constraint=false, headport=w];
+  backTop -> backMid -> backBottom [style=invis, weight=100];
+  backTop -> input [style=invis, weight=100];
+  backMid -> sumok [style=invis, weight=100];
+  backBottom -> more [style=invis, weight=100];
+  more -> total [label="нет"];
+  total -> canconfirm;
+  canconfirm -> confirm [label="да"];
+  canconfirm -> reject [label="нет"];
+  confirm -> end;
+  reject -> end [constraint=false];
+  {rank=same; valid; error;}
+  {rank=same; add; merge;}
+  {rank=same; confirm; reject;}
+  {rank=same; backTop; input;}
+  {rank=same; backMid; sumok;}
+  {rank=same; backBottom; more;}
+}

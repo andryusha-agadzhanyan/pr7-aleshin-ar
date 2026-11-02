@@ -1,0 +1,19 @@
+add;M01;Monitor;10000;2
+M01;Monitor;10000;3
+category
+add;L01;Limit;450000;1
+confirm
+add;C;Cable;100;1
+remove;M01
+confirm
+new
+add;X;Too much;500000.01;1
+confirm
+remove;X
+confirm
+add;X;Bad;-1;1
+add;X; Bad;1;1
+add;P;Good;9999.99;1
+total
+exit
+add;IGNORED;Ignored;1;1

@@ -1,0 +1,32 @@
+productId;name;price;quantity;expected
+# Случаи приложения А; количество 51 допустимо в варианте 3.
+M01;Monitor 27;32990;2;OK:qty=2
+K01;Keyboard;4490;3;OK:qty=3
+M02;Monitor 32;45000;1;OK:qty=1
+P01;Printer;15000;1;OK:qty=1
+M01;Monitor 27;32990;1;OK:merged,qty=3
+X01;Broken;-100;1;SKIP:price must be > 0
+L01;Lamp;1000;1;OK:qty=1
+L02;Lamp Pro;2000;50;OK:qty=50
+L03;Lamp Max;3000;51;OK:qty=51
+C01;Cable;500;5;OK:qty=5
+C02;Cable Pro;1500;2;OK:qty=2
+TOTAL;positions=9;sum=431940.00;category=крупная;confirm=OK
+# Четыре дополнительные строки варианта 3.
+V01;Exact limit;68060;1;OK:qty=1
+TOTAL;positions=10;sum=500000.00;category=крупная;confirm=OK
+V02;One kopeck above;0.01;1;OK:qty=1
+TOTAL;positions=11;sum=500000.01;category=крупнейшая;confirm=ERROR:IllegalStateException
+V01;Exact limit;68060;1;OK:merged,qty=2
+V03;Additional product;9999.99;1;OK:qty=1
+# Собственные проверки ошибочных данных. Заказ после ошибки не меняется.
+X02;Zero price;0;1;SKIP:price must be > 0
+X03;Zero quantity;100;0;SKIP:quantity must be in [1, 100]
+X04;Large quantity;100;101;SKIP:quantity must be in [1, 100]
+X05;NaN price;NaN;1;SKIP:price must be > 0
+X06;Infinite price;Infinity;1;SKIP:price must be > 0
+X07;Text price;abc;1;SKIP:price is not a number
+X08;Text quantity;100;abc;SKIP:quantity is not an integer
+X09; Leading space;100;1;SKIP:surrounding spaces are not allowed
+M01;Monitor 27;32990;98;SKIP:quantity must be in [1, 100]
+TOTAL;positions=12;sum=578060.00;category=крупнейшая;confirm=ERROR:IllegalStateException

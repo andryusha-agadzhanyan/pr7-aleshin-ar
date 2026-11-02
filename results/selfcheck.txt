@@ -1,0 +1,86 @@
+PR7 / variant 3
+PASS unit/01 Product valid
+PASS unit/02 id null
+PASS unit/03 id empty
+PASS unit/04 name null
+PASS unit/05 price zero
+PASS unit/06 price negative
+PASS unit/07 OrderItem valid
+PASS unit/08 quantity zero
+PASS unit/09 quantity 101
+PASS unit/10 quantity 1
+PASS unit/11 quantity 100
+PASS unit/12 increase 2 plus 3
+PASS unit/13 two products
+PASS unit/14 merge same id
+PASS unit/15 total two positions
+PASS unit/16 confirm nonempty
+PASS unit/17 confirm empty
+PASS unit/18 add after confirm
+PASS unit/19 variant A 500000 allowed
+PASS unit/20 variant A 500000.01 rejected
+PASS unit/21 variant B 9999.99
+PASS unit/22 variant B 10000
+PASS extra/01 category 100000
+PASS extra/02 category 100000.01
+PASS extra/03 category 500000
+PASS extra/04 category 500000.01
+PASS extra/05 category empty
+PASS extra/06 id blank
+PASS extra/07 name empty
+PASS extra/08 price NaN
+PASS extra/09 price infinity
+PASS extra/10 product null
+PASS extra/11 quantity negative
+PASS extra/12 line total
+PASS extra/13 increase zero
+PASS extra/14 increase negative
+PASS extra/15 increase over limit
+PASS extra/16 increase int overflow
+PASS extra/17 employee null
+PASS extra/18 remove recalculates total
+PASS extra/19 remove missing
+PASS extra/20 remove after confirm
+PASS extra/21 confirm twice
+PASS extra/22 immutable list
+PASS extra/23 confirmed item isolated
+PASS extra/24 snapshot isolated
+PASS extra/25 failed merge unchanged
+PASS extra/26 repair rejected order
+PASS input/01 price text
+PASS input/02 quantity text
+PASS input/03 surrounding spaces
+PASS input/04 trailing separator
+PASS input/05 empty id
+UNIT: 53 PASS, 0 FAIL
+PASS data/1 OK:qty=2
+PASS data/2 OK:qty=3
+PASS data/3 OK:qty=1
+PASS data/4 OK:qty=1
+PASS data/5 OK:merged,qty=3
+PASS data/6 SKIP:price must be > 0, got -100.0
+PASS data/7 OK:qty=1
+PASS data/8 OK:qty=50
+PASS data/9 OK:qty=51
+PASS data/10 OK:qty=5
+PASS data/11 OK:qty=2
+PASS data/12 TOTAL positions=9 category=крупная confirm=OK
+PASS data/13 OK:qty=1
+PASS data/14 TOTAL positions=10 category=крупная confirm=OK
+PASS data/15 OK:qty=1
+PASS data/16 TOTAL positions=11 category=крупнейшая confirm=ERROR:IllegalStateException
+PASS data/17 OK:merged,qty=2
+PASS data/18 OK:qty=1
+PASS data/19 SKIP:price must be > 0, got 0.0
+PASS data/20 SKIP:quantity must be in [1, 100]
+PASS data/21 SKIP:quantity must be in [1, 100]
+PASS data/22 SKIP:price must be > 0, got NaN
+PASS data/23 SKIP:price must be > 0, got Infinity
+PASS data/24 SKIP:price is not a number
+PASS data/25 SKIP:quantity is not an integer
+PASS data/26 SKIP:surrounding spaces are not allowed
+PASS data/27 SKIP:quantity must be in [1, 100]
+PASS data/28 TOTAL positions=12 category=крупнейшая confirm=ERROR:IllegalStateException
+positions=12 total=578060.00 status=DRAFT category=крупнейшая
+DATA: 28 PASS, 0 FAIL
+TOTAL: 81 PASS, 0 FAIL
