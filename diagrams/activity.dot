@@ -1,7 +1,7 @@
 digraph G {
-  graph [rankdir=TB, bgcolor="white", pad=0.25, nodesep=0.35, ranksep=0.42, splines=polyline];
-  node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#444444", fontname="Times New Roman", fontsize=15, margin="0.14,0.10"];
-  edge [fontname="Times New Roman", fontsize=13, color="#555555", arrowsize=0.7];
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.25, ranksep=0.16, splines=polyline];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#444444", fontname="Times New Roman", fontsize=16, margin="0.08,0.06"];
+  edge [fontname="Times New Roman", fontsize=14, color="#555555", arrowsize=0.7];
   start [label="Начало", shape=oval, group=main];
   create [label="Создать заказ сотрудника\nOrderService.createOrder: статус DRAFT", group=main];
   input [label="Получить товар и количество", shape=parallelogram, group=main];
